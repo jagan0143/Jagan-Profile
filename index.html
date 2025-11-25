@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jagan - Full Stack Developer</title>
+    <title>Jaganath N - NodeJS Developer & Solution Analyst</title>
+    <meta name="description" content="Experienced NodeJS Developer & Solution Analyst with 4+ years of expertise in building scalable backend systems, RESTful APIs, and full-stack web applications.">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Code+Pro:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -165,14 +166,24 @@
             color: var(--accent-primary);
             font-size: 1rem;
             margin-bottom: 1rem;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            background: rgba(0, 212, 170, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            border: 1px solid rgba(0, 212, 170, 0.2);
         }
 
         .greeting::before {
             content: '>';
             opacity: 0.6;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 0.6; }
+            51%, 100% { opacity: 0; }
         }
 
         .hero h1 {
@@ -181,6 +192,7 @@
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 1.5rem;
+            position: relative;
         }
 
         .hero h1 span {
@@ -188,12 +200,48 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--gradient-1);
+            opacity: 0.3;
+            border-radius: 4px;
+            z-index: -1;
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-subtitle::before {
+            content: '';
+            width: 40px;
+            height: 3px;
+            background: var(--gradient-2);
+            border-radius: 2px;
+        }
+
+        .role-badge {
+            background: rgba(124, 92, 255, 0.15);
+            color: var(--accent-tertiary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(124, 92, 255, 0.3);
         }
 
         .hero-description {
@@ -210,34 +258,55 @@
 
         .btn {
             padding: 1rem 2rem;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 1rem;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
         }
 
         .btn-primary {
             background: var(--gradient-1);
             color: var(--bg-primary);
+            box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.4);
         }
 
         .btn-secondary {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.05);
             color: var(--text-primary);
             border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
             border-color: var(--accent-primary);
             color: var(--accent-primary);
+            background: rgba(0, 212, 170, 0.1);
+            transform: translateY(-3px);
         }
 
         /* Profile Image */
@@ -246,6 +315,37 @@
             justify-content: center;
             align-items: center;
             animation: fadeInUp 1s ease-out 0.3s both;
+            position: relative;
+        }
+
+        /* Decorative elements */
+        .hero-image::before {
+            content: '< />';
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+            opacity: 0.3;
+            animation: code-float 4s ease-in-out infinite;
+        }
+
+        .hero-image::after {
+            content: '{ }';
+            position: absolute;
+            bottom: 0;
+            left: 30px;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 2rem;
+            color: var(--accent-tertiary);
+            opacity: 0.3;
+            animation: code-float 4s ease-in-out infinite 2s;
+        }
+
+        @keyframes code-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-15px) rotate(5deg); opacity: 0.5; }
         }
 
         .profile-frame {
@@ -257,10 +357,17 @@
         .profile-frame::before {
             content: '';
             position: absolute;
-            inset: -3px;
-            background: var(--gradient-1);
+            inset: -4px;
+            background: conic-gradient(
+                from 0deg,
+                var(--accent-primary),
+                var(--accent-tertiary),
+                var(--accent-secondary),
+                var(--accent-primary)
+            );
             border-radius: 50%;
-            animation: rotate 6s linear infinite;
+            animation: rotate 4s linear infinite;
+            filter: blur(1px);
         }
 
         .profile-frame::after {
@@ -276,6 +383,21 @@
             to { transform: rotate(360deg); }
         }
 
+        /* Glow effect behind profile */
+        .profile-glow {
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle, rgba(0, 212, 170, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
         .profile-img {
             position: absolute;
             inset: 6px;
@@ -288,55 +410,81 @@
             font-size: 8rem;
             color: var(--text-muted);
             overflow: hidden;
+            box-shadow: 
+                0 0 40px rgba(0, 212, 170, 0.3),
+                0 0 80px rgba(0, 212, 170, 0.1),
+                inset 0 0 30px rgba(0, 0, 0, 0.3);
         }
 
         .profile-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center top;
+            transition: transform 0.5s ease;
+            filter: contrast(1.05) brightness(1.02);
+        }
+
+        .profile-frame:hover .profile-img img {
+            transform: scale(1.05);
         }
 
         /* Stats floating cards */
         .floating-stat {
             position: absolute;
-            background: var(--bg-card);
+            background: rgba(26, 26, 36, 0.9);
             border: 1px solid var(--border-color);
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
+            padding: 1.2rem 1.8rem;
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
             z-index: 2;
             animation: float 3s ease-in-out infinite;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(0, 212, 170, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .floating-stat:hover {
+            transform: translateY(-15px) scale(1.05);
+            border-color: var(--accent-primary);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(0, 212, 170, 0.2);
         }
 
         .floating-stat.stat-1 {
-            top: 10%;
-            right: -10%;
+            top: 5%;
+            right: -15%;
             animation-delay: 0s;
         }
 
         .floating-stat.stat-2 {
-            bottom: 20%;
-            left: -15%;
-            animation-delay: 1s;
+            bottom: 15%;
+            left: -18%;
+            animation-delay: 1.5s;
         }
 
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-12px); }
         }
 
         .stat-number {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: 700;
             background: var(--gradient-2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            line-height: 1;
         }
 
         .stat-label {
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+            font-weight: 500;
         }
 
         /* Section Styles */
@@ -672,6 +820,13 @@
             margin-bottom: 0.75rem;
         }
 
+        .project-role {
+            font-size: 0.85rem;
+            color: var(--accent-secondary);
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+        }
+
         .project-description {
             color: var(--text-secondary);
             font-size: 0.9rem;
@@ -710,7 +865,7 @@
 
         .contact-info p {
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 0rem;
         }
 
         .contact-details {
@@ -749,6 +904,16 @@
         .contact-value {
             color: var(--text-primary);
             font-weight: 500;
+        }
+
+        .contact-value a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            text-decoration: underline;
         }
 
         .contact-form {
@@ -918,11 +1083,15 @@
         <div class="hero-content">
             <div class="hero-text">
                 <p class="greeting">Hello, I'm</p>
-                <h1>Jagan <span>Nath</span></h1>
-                <p class="hero-subtitle">Full Stack Developer</p>
+                <h1>Jaganath <span>N</span></h1>
+                <p class="hero-subtitle">
+                    NodeJS Developer & Solution Analyst
+                    <span class="role-badge">Open to Opportunities</span>
+                </p>
                 <p class="hero-description">
-                    Passionate about building scalable web applications with modern technologies. 
-                    Transforming ideas into elegant, efficient, and user-centric digital solutions.
+                    Crafting robust backend architectures and delivering scalable solutions. 
+                    Specializing in NodeJS ecosystems, microservices, and seamless client collaboration 
+                    to transform complex requirements into elegant digital solutions.
                 </p>
                 <div class="cta-buttons">
                     <a href="#contact" class="btn btn-primary">Get In Touch</a>
@@ -931,14 +1100,17 @@
             </div>
             <div class="hero-image">
                 <div class="profile-frame">
-                    <div class="profile-img">👨‍💻</div>
+                    <div class="profile-glow"></div>
+                    <div class="profile-img">
+                        <img src="Profile Photo.jpg" alt="Jaganath N - NodeJS Developer">
+                    </div>
                     <div class="floating-stat stat-1">
-                        <div class="stat-number">5+</div>
+                        <div class="stat-number">4+</div>
                         <div class="stat-label">Years Experience</div>
                     </div>
                     <div class="floating-stat stat-2">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Projects Completed</div>
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Projects Delivered</div>
                     </div>
                 </div>
             </div>
@@ -954,40 +1126,43 @@
         <div class="about-content">
             <div class="about-text">
                 <p>
-                    I'm a Full Stack Developer with 5+ years of experience in designing and developing 
-                    web applications. I specialize in building robust, scalable solutions using modern 
-                    JavaScript frameworks and cloud technologies.
+                    With more than four years of hands-on experience, I'm a proficient NodeJS Developer 
+                    and Solution Analyst who bridges the gap between technical excellence and business needs. 
+                    My journey spans from crafting RESTful APIs to architecting microservices that power 
+                    enterprise-grade applications.
                 </p>
                 <p>
-                    My expertise spans across the entire development stack, from crafting intuitive 
-                    user interfaces to architecting efficient backend systems. I'm passionate about 
-                    clean code, best practices, and continuous learning.
+                    I bring a unique combination of technical depth and client management skills to every project. 
+                    Whether it's requirement analysis, solution design, or hands-on development, I thrive in 
+                    Agile environments where collaboration and continuous improvement drive success.
                 </p>
                 <p>
-                    When I'm not coding, you'll find me exploring new technologies, contributing to 
-                    open-source projects, or sharing knowledge through tech blogs and community meetups.
+                    My expertise extends across the full development lifecycle — from initial client discussions 
+                    and cost estimation to deploying and maintaining production systems on Google Cloud Platform. 
+                    I'm passionate about writing clean, maintainable code and mentoring team members to achieve 
+                    project excellence.
                 </p>
             </div>
             <div class="about-highlights">
                 <div class="highlight-card">
                     <div class="highlight-icon">🎯</div>
-                    <h4 class="highlight-title">Problem Solver</h4>
-                    <p class="highlight-desc">Analytical approach to complex challenges</p>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon">🚀</div>
-                    <h4 class="highlight-title">Performance</h4>
-                    <p class="highlight-desc">Optimized & scalable solutions</p>
-                </div>
-                <div class="highlight-card">
-                    <div class="highlight-icon">💡</div>
-                    <h4 class="highlight-title">Innovation</h4>
-                    <p class="highlight-desc">Latest technologies & best practices</p>
+                    <h4 class="highlight-title">Solution Architect</h4>
+                    <p class="highlight-desc">Designing scalable microservices & system architectures</p>
                 </div>
                 <div class="highlight-card">
                     <div class="highlight-icon">🤝</div>
-                    <h4 class="highlight-title">Collaboration</h4>
-                    <p class="highlight-desc">Effective team communication</p>
+                    <h4 class="highlight-title">Client Management</h4>
+                    <p class="highlight-desc">Requirement analysis & stakeholder communication</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">⚡</div>
+                    <h4 class="highlight-title">Performance Focus</h4>
+                    <p class="highlight-desc">Optimized queries & efficient data handling</p>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon">🔄</div>
+                    <h4 class="highlight-title">Agile Practitioner</h4>
+                    <p class="highlight-desc">Sprint planning, estimation & delivery</p>
                 </div>
             </div>
         </div>
@@ -1001,43 +1176,43 @@
         </div>
         <div class="skills-grid">
             <div class="skill-category">
-                <h3><span>🎨</span>Frontend</h3>
-                <ul class="skill-list">
-                    <li>React.js / Next.js</li>
-                    <li>Angular / Vue.js</li>
-                    <li>TypeScript</li>
-                    <li>Tailwind CSS / SASS</li>
-                    <li>Redux / Zustand</li>
-                </ul>
-            </div>
-            <div class="skill-category">
                 <h3><span>⚙️</span>Backend</h3>
                 <ul class="skill-list">
-                    <li>Node.js / Express.js</li>
-                    <li>Python / Django</li>
-                    <li>Java / Spring Boot</li>
-                    <li>REST APIs / GraphQL</li>
-                    <li>Microservices</li>
+                    <li>NodeJS</li>
+                    <li>ExpressJS</li>
+                    <li>HapiJS</li>
+                    <li>RESTful APIs</li>
+                    <li>Microservices Architecture</li>
                 </ul>
             </div>
             <div class="skill-category">
-                <h3><span>🗄️</span>Database</h3>
+                <h3><span>🎨</span>Frontend</h3>
                 <ul class="skill-list">
-                    <li>PostgreSQL / MySQL</li>
-                    <li>MongoDB / Redis</li>
-                    <li>Elasticsearch</li>
-                    <li>Firebase / Supabase</li>
-                    <li>Prisma / TypeORM</li>
+                    <li>ReactJS</li>
+                    <li>HTML5 & CSS3</li>
+                    <li>Bootstrap</li>
+                    <li>JavaScript (ES6+)</li>
+                    <li>TypeScript</li>
                 </ul>
             </div>
             <div class="skill-category">
-                <h3><span>☁️</span>DevOps & Cloud</h3>
+                <h3><span>🗄️</span>Database & Cloud</h3>
                 <ul class="skill-list">
-                    <li>AWS / Azure / GCP</li>
-                    <li>Docker / Kubernetes</li>
-                    <li>CI/CD Pipelines</li>
-                    <li>Git / GitHub Actions</li>
-                    <li>Linux / Nginx</li>
+                    <li>MySQL</li>
+                    <li>MongoDB</li>
+                    <li>Google Cloud Platform</li>
+                    <li>Database Optimization</li>
+                    <li>Data Migration Scripts</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3><span>🛠️</span>Tools & Soft Skills</h3>
+                <ul class="skill-list">
+                    <li>Git Version Control</li>
+                    <li>JIRA & Agile</li>
+                    <li>Problem Solving</li>
+                    <li>Project Management</li>
+                    <li>Team Collaboration</li>
                 </ul>
             </div>
         </div>
@@ -1046,22 +1221,22 @@
     <!-- Experience Section -->
     <section id="experience">
         <div class="section-header">
-            <p class="section-tag">Career</p>
+            <p class="section-tag">Career Journey</p>
             <h2 class="section-title">Work Experience</h2>
         </div>
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <p class="timeline-date">Jan 2022 - Present</p>
-                    <h3 class="timeline-title">Senior Full Stack Developer</h3>
-                    <p class="timeline-company">TechCorp Solutions</p>
+                    <p class="timeline-date">May 2025 - Present</p>
+                    <h3 class="timeline-title">Software Engineer</h3>
+                    <p class="timeline-company">Aspire Software</p>
                     <div class="timeline-description">
                         <ul>
-                            <li>Lead development of enterprise-grade web applications serving 100K+ users</li>
-                            <li>Architected microservices infrastructure reducing system latency by 40%</li>
-                            <li>Mentored junior developers and conducted code reviews</li>
-                            <li>Implemented CI/CD pipelines improving deployment efficiency by 60%</li>
+                            <li>Leading NodeJS development initiatives for product enhancement and feature expansion</li>
+                            <li>Collaborating with cross-functional teams to deliver high-quality software solutions</li>
+                            <li>Implementing best practices for code quality, performance optimization, and scalability</li>
+                            <li>Contributing to architectural decisions and technical roadmap planning</li>
                         </ul>
                     </div>
                 </div>
@@ -1069,15 +1244,16 @@
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <p class="timeline-date">Jun 2019 - Dec 2021</p>
-                    <h3 class="timeline-title">Full Stack Developer</h3>
-                    <p class="timeline-company">Digital Innovations Inc.</p>
+                    <p class="timeline-date">Jan 2022 - Apr 2025 • 3 years 4 months</p>
+                    <h3 class="timeline-title">NodeJS Developer & Solution Analyst</h3>
+                    <p class="timeline-company">Doodleblue Innovations Private Limited</p>
                     <div class="timeline-description">
                         <ul>
-                            <li>Developed and maintained multiple React/Node.js applications</li>
-                            <li>Built RESTful APIs handling 1M+ requests daily</li>
-                            <li>Optimized database queries improving performance by 50%</li>
-                            <li>Collaborated with cross-functional teams in Agile environment</li>
+                            <li>Spearheaded NodeJS development and served as Solution Analyst for multiple enterprise projects</li>
+                            <li>Conducted comprehensive requirement analysis and translated client needs into technical specifications</li>
+                            <li>Managed client relationships, providing regular updates and ensuring stakeholder satisfaction</li>
+                            <li>Mentored and supported ReactJS developers, fostering team growth and knowledge sharing</li>
+                            <li>Performed cost and effort estimation for project planning and resource allocation</li>
                         </ul>
                     </div>
                 </div>
@@ -1085,15 +1261,15 @@
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <p class="timeline-date">Aug 2017 - May 2019</p>
-                    <h3 class="timeline-title">Junior Web Developer</h3>
-                    <p class="timeline-company">StartUp Hub</p>
+                    <p class="timeline-date">Sep 2021 - Dec 2021 • 4 months</p>
+                    <h3 class="timeline-title">Full Stack Development Intern</h3>
+                    <p class="timeline-company">Doodleblue Innovations Private Limited</p>
                     <div class="timeline-description">
                         <ul>
-                            <li>Created responsive web interfaces using modern CSS frameworks</li>
-                            <li>Developed backend services with Node.js and MongoDB</li>
-                            <li>Participated in agile sprints and daily stand-ups</li>
-                            <li>Gained expertise in version control and collaborative development</li>
+                            <li>Developed backend RESTful APIs using NodeJS for various application modules</li>
+                            <li>Built responsive user interfaces with ReactJS following modern design patterns</li>
+                            <li>Managed database administration tasks and ensured data integrity</li>
+                            <li>Gained foundational experience in full-stack development workflows and Agile methodologies</li>
                         </ul>
                     </div>
                 </div>
@@ -1109,18 +1285,18 @@
         </div>
         <div class="education-grid">
             <div class="education-card">
-                <p class="education-year">2013 - 2017</p>
-                <h3 class="education-degree">Bachelor of Technology</h3>
+                <p class="education-year">2017 - 2021</p>
+                <h3 class="education-degree">Bachelor of Engineering</h3>
                 <p class="education-school">Computer Science & Engineering</p>
-                <p class="education-school">National Institute of Technology</p>
-                <p class="education-score">CGPA: 8.5/10</p>
+                <p class="education-school">Loyola-ICAM College of Engineering and Technology, Chennai</p>
+                <p class="education-score">B.E. CSE Graduate</p>
             </div>
             <div class="education-card">
-                <p class="education-year">2022</p>
-                <h3 class="education-degree">AWS Solutions Architect</h3>
-                <p class="education-school">Professional Certification</p>
-                <p class="education-school">Amazon Web Services</p>
-                <p class="education-score">Certified Associate</p>
+                <p class="education-year">Nov 2020 - Feb 2021</p>
+                <h3 class="education-degree">Full Stack Web Development</h3>
+                <p class="education-school">MERN Stack Certification Program</p>
+                <p class="education-school">Edureka</p>
+                <p class="education-score">Certified MERN Stack Developer</p>
             </div>
         </div>
     </section>
@@ -1133,47 +1309,56 @@
         </div>
         <div class="projects-grid">
             <div class="project-card">
-                <div class="project-image">🛒</div>
+                <div class="project-image">📱</div>
                 <div class="project-content">
-                    <h3 class="project-title">E-Commerce Platform</h3>
+                    <h3 class="project-title">Umobile Telecom Platform</h3>
+                    <p class="project-role">NodeJS Developer & Solution Analyst</p>
                     <p class="project-description">
-                        Full-featured online marketplace with payment integration, inventory management, and real-time analytics.
+                        Comprehensive mobile application services and Web CMS for Umobile telecommunications. 
+                        Architected microservices infrastructure with RESTful APIs handling complex telecom modules.
+                        Led requirement analysis, client management, and solution design in Agile sprints.
                     </p>
                     <div class="project-tech">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                        <span class="tech-tag">Stripe</span>
+                        <span class="tech-tag">NodeJS</span>
+                        <span class="tech-tag">HapiJS</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">ReactJS</span>
                     </div>
                 </div>
             </div>
             <div class="project-card">
-                <div class="project-image">📊</div>
+                <div class="project-image">🧹</div>
                 <div class="project-content">
-                    <h3 class="project-title">Analytics Dashboard</h3>
+                    <h3 class="project-title">CUBE84 Service Platform</h3>
+                    <p class="project-role">NodeJS Developer</p>
                     <p class="project-description">
-                        Real-time data visualization platform with customizable widgets, automated reporting, and AI insights.
+                        Enterprise web application for managing cleaning and maintenance services in urban areas. 
+                        Designed comprehensive reporting system for customer service data with optimized complex queries 
+                        handling enormous data volumes.
                     </p>
                     <div class="project-tech">
-                        <span class="tech-tag">Next.js</span>
-                        <span class="tech-tag">D3.js</span>
-                        <span class="tech-tag">GraphQL</span>
-                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">NodeJS</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">TypeScript</span>
+                        <span class="tech-tag">MySQL</span>
                     </div>
                 </div>
             </div>
             <div class="project-card">
-                <div class="project-image">💬</div>
+                <div class="project-image">🎬</div>
                 <div class="project-content">
-                    <h3 class="project-title">Collaboration Suite</h3>
+                    <h3 class="project-title">Woody - MSI Media Services</h3>
+                    <p class="project-role">Software Engineer</p>
                     <p class="project-description">
-                        Real-time team collaboration tool with video conferencing, document sharing, and project management.
+                        Application services and enhancement for MSI media encoding and decoding products. 
+                        Contributing to product improvements, feature development, and maintaining high-performance 
+                        media processing pipelines.
                     </p>
                     <div class="project-tech">
-                        <span class="tech-tag">Vue.js</span>
-                        <span class="tech-tag">WebRTC</span>
-                        <span class="tech-tag">Socket.io</span>
-                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">NodeJS</span>
+                        <span class="tech-tag">Media APIs</span>
+                        <span class="tech-tag">GCP</span>
+                        <span class="tech-tag">Microservices</span>
                     </div>
                 </div>
             </div>
@@ -1188,36 +1373,51 @@
         </div>
         <div class="contact-content">
             <div class="contact-info">
-                <h3>Let's Work Together</h3>
+                <h3>Let's Build Something Great</h3>
                 <p>
-                    I'm always open to discussing new opportunities, innovative projects, 
-                    or ways to contribute to your team's success. Feel free to reach out!
+                    I'm always excited to discuss new opportunities, challenging projects, 
+                    or ways to contribute to your team's success. Whether you need a skilled 
+                    NodeJS developer or a solution analyst who understands both technology 
+                    and business needs — let's connect!
                 </p>
                 <ul class="contact-details">
                     <li>
                         <span class="contact-icon">📧</span>
                         <div>
                             <p class="contact-label">Email</p>
-                            <p class="contact-value">jagan.nath@email.com</p>
+                            <p class="contact-value"><a href="mailto:jagan0200@gmail.com">jagan0200@gmail.com</a></p>
                         </div>
                     </li>
                     <li>
                         <span class="contact-icon">📱</span>
                         <div>
                             <p class="contact-label">Phone</p>
-                            <p class="contact-value">+91 98765 43210</p>
+                            <p class="contact-value"><a href="tel:+919629794726">+91 96297 94726</a></p>
                         </div>
                     </li>
                     <li>
                         <span class="contact-icon">📍</span>
                         <div>
                             <p class="contact-label">Location</p>
-                            <p class="contact-value">Bangalore, India</p>
+                            <p class="contact-value">Hosur, Tamil Nadu, India</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="contact-icon">💼</span>
+                        <div>
+                            <p class="contact-label">LinkedIn</p>
+                            <p class="contact-value"><a href="https://www.linkedin.com/in/jaganath-n-885a32227/" target="_blank">Connect on LinkedIn</a></p>
                         </div>
                     </li>
                 </ul>
             </div>
-            <form class="contact-form">
+            <form class="contact-form" action="https://formsubmit.co/jagan0200@gmail.com" method="POST">
+                <!-- FormSubmit Configuration -->
+                <input type="hidden" name="_subject" value="New Contact from Portfolio Website!">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="text" name="_honey" style="display:none">
+                
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" placeholder="John Doe" required>
@@ -1242,12 +1442,11 @@
     <!-- Footer -->
     <footer>
         <div class="social-links">
-            <a href="#" class="social-link" title="GitHub">💻</a>
-            <a href="#" class="social-link" title="LinkedIn">💼</a>
-            <a href="#" class="social-link" title="Twitter">🐦</a>
-            <a href="#" class="social-link" title="Blog">📝</a>
+            <a href="https://github.com/jagan0143" class="social-link" title="GitHub" target="_blank">💻</a>
+            <a href="https://www.linkedin.com/in/jaganath-n-885a32227/" class="social-link" title="LinkedIn" target="_blank">💼</a>
+            <a href="mailto:jagan0200@gmail.com" class="social-link" title="Email">📧</a>
         </div>
-        <p class="copyright">© 2025 Jagan Nath. Built with ❤️ and lots of ☕</p>
+        <p class="copyright">© 2025 Jaganath N. Crafted with passion and ☕</p>
     </footer>
 
     <script>
@@ -1287,13 +1486,13 @@
             observer.observe(el);
         });
 
-        // Form submission handler
+        // Form submission handler - show loading state
         document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            this.reset();
+            const btn = this.querySelector('button[type="submit"]');
+            btn.innerHTML = '✉️ Sending...';
+            btn.disabled = true;
+            // Form will naturally submit to FormSubmit.co
         });
     </script>
 </body>
 </html>
-

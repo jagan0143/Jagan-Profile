@@ -958,6 +958,50 @@
             resize: vertical;
         }
 
+        /* Form Success Message */
+        .form-message {
+            display: none;
+            margin-top: 1.5rem;
+        }
+
+        .success-message {
+            background: rgba(0, 212, 170, 0.1);
+            border: 1px solid var(--accent-primary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+
+        .success-message h4 {
+            color: var(--accent-primary);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
         /* Footer */
         footer {
             background: var(--bg-secondary);
@@ -1411,13 +1455,7 @@
                     </li>
                 </ul>
             </div>
-            <form class="contact-form" action="https://formsubmit.co/8dd6a4c43e2eefc7c9dc087dd9c9cc88" method="POST">
-                <!-- FormSubmit Configuration -->
-                <input type="hidden" name="_subject" value="New Contact from Portfolio Website!">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <input type="text" name="_honey" style="display:none">
-                
+            <form class="contact-form" id="contactForm">
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" placeholder="John Doe" required>
@@ -1435,6 +1473,7 @@
                     <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                <div class="form-message" id="formMessage"></div>
             </form>
         </div>
     </section>
@@ -1486,12 +1525,40 @@
             observer.observe(el);
         });
 
-        // Form submission handler - show loading state
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        // Form submission handler - dummy response
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
             const btn = this.querySelector('button[type="submit"]');
+            const formMessage = document.getElementById('formMessage');
+            const name = document.getElementById('name').value;
+            
+            // Show loading state
             btn.innerHTML = '✉️ Sending...';
             btn.disabled = true;
-            // Form will naturally submit to FormSubmit.co
+            
+            // Simulate sending delay
+            setTimeout(() => {
+                // Show success message
+                formMessage.innerHTML = `
+                    <div class="success-message">
+                        <span class="success-icon">✅</span>
+                        <h4>Thank you, ${name}!</h4>
+                        <p>Your message has been received. I'll get back to you within 24-48 hours.</p>
+                    </div>
+                `;
+                formMessage.style.display = 'block';
+                
+                // Reset form and button
+                this.reset();
+                btn.innerHTML = 'Send Message';
+                btn.disabled = false;
+                
+                // Hide message after 5 seconds
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 5000);
+            }, 1500);
         });
     </script>
 </body>
